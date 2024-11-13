@@ -15,19 +15,13 @@ public class FileDeletionScheduler {
 	@Scheduled(cron = "0 0 1 * * ?")
 	public void deleteFiles() {
 		File directory = new File(directoryPath);
-		System.out.println("Directory path: " + directoryPath);
 		
 		if (directory.exists() && directory.isDirectory()) {
 			File[] files = directory.listFiles();
 			if (files != null) {
 				for (File file : files) {
 					if (file.isFile()) {
-						boolean deleted = file.delete();
-						if (deleted) {
-							System.out.println("Deleted file: " + file.getName());
-						} else {
-							System.out.println("Failed to delete file: " + file.getName());
-						}
+						file.delete();
 					}
 				}
 			}
